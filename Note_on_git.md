@@ -36,3 +36,13 @@ git add [文件名]
 ```
 若此时键入　`git status` 将会显示文件已修改，然后可以放心的提交了　`git commit -m "[提交的说明]`
 通过不停的修改，就会不停的提交修改到版本库里。git每一个修改后的文件成为commit，一旦文件改乱了或者删了，可以从最近的一个commit恢复，就像一个游戏存档一样。
+## 读取存档
+
+`git log` 表示修改的历史记录　`--pretty==oneline`参数可以简化输出的参数，其中输出的信息中会有一串16进制的数字，表示的每个commit的版本号(commit id)。 其中　`HEAD` 表示当前版本，上个版本是`HEAD^`,上上个版本为`HEAD^^`，上10000个版本为`HEAD~10000`
+
+所以，现在可以将当前版本回退到上一个版本，by
+`git reset --hard HEAD^`
+BUT, 你后悔了想回去之前的当前版本，就必须使用`git reset --hard [HEAD的版本号]`
+版本号可以通过`git reflog`（该命令会记录你的每一次的git命令）去寻找版本号
+
+> 使用 `git revert <commit_id>`操作实现以退为进，git revert 不同于 git reset  它不会擦除"回退"之后的 commit_id ,而是正常的当做次"commit"，产生一次新的操作记录，所以可以push，不会让你再pull其他的不敢妄加猜测。
